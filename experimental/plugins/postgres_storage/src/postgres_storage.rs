@@ -1405,6 +1405,7 @@ impl WalletStorage for PostgresStorage {
         let conn = pool.get().unwrap();
         let query_qualifier = get_wallet_strategy_qualifier();
         let tx: transaction::Transaction = transaction::Transaction::new(&conn)?;
+        println!(">> >> UPDATE-TAGS 0");
 
         let res = match query_qualifier {
             Some(_) => {
@@ -1469,8 +1470,10 @@ impl WalletStorage for PostgresStorage {
                 };
             }
         }
+        println!(">> >> UPDATE-TAGS 1, committing transaction");
         tx.commit()?;
 
+        println!(">> >> UPDATE-TAGS out");
         Ok(())
     }
 
